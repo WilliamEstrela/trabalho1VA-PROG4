@@ -1,0 +1,13 @@
+<div id=messageDiv style="width:100%">
+	<div class="alert alert-dismissable alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>Mensagem!</h4><p><span id="bloco_mensagem"><!-- $beginBlock bloco_mensagem -->
+		<font color="red" id=message>${message}</font><br/>
+<!-- $endBlock bloco_mensagem --></span></p>
+	</div>
+</div>
+<script>
+	if (document.getElementById("bloco_mensagem").innerHTML.trim().length == 0) {
+		document.getElementById("messageDiv").style.display = 'none';
+	}
+</script>

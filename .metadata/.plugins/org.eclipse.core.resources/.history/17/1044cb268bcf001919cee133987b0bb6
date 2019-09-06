@@ -1,0 +1,50 @@
+<h1>Dados Switch(${acao})</h1>
+<form action="sistema" method="post">
+<input type="hidden" name="casoDeUso" value="manterSwitch">
+<input type="hidden" name="acao" value="${acao}">
+<table>
+<tr>
+	<th>Id</th>
+	<th>Nome</th>
+</tr>
+<tr>
+	<td><input type="text" name="idswitch" value="${switch.idswitch}"></td>
+	<td><input type="text" name="nome" value="${switch.nome}"></td>
+</tr>
+<tr>
+	<th>Localização</th>
+	<th>Observação</th>
+</tr>
+<tr>
+	<td><input type="text" name="localizacao" value="${switch.localizacao}"></td>
+	<td><input type="text" name="observacao" value="${switch.observacao}"></td>
+</tr>
+<tr>
+	<th>Tipo de Switch</th>
+	<th>VLan</th>
+</tr>
+<tr>
+	<td>
+	<select name="tipo_idtipo">
+	    <option value="">Selecione</option>
+		<!-- $beginBlock estrangeiro.tipo -->
+		<option value="${estrangeiro.tipo.idtipo}" ${estrangeiro.tipo.selected}>${estrangeiro.tipo.tipo}</option>
+		<!-- $endBlock estrangeiro.tipo -->
+	</select>
+	</td>
+	
+	<td>
+	<select name="vlan">
+	 	<option value="">Selecione</option>
+		<!-- $beginBlock vlan_ativo.vlan -->
+		<option value="${vlan_ativo.vlan.vlan}" ${vlan_ativo.vlan.selected}>${vlan_ativo.vlan.nome}</option>
+		<!-- $endBlock vlan_ativo.vlan -->
+	</select>
+	</td>
+</tr>
+<tr>
+	<td colspan="2"><input type="submit" value="Salvar"></td>
+</table>
+</form>
+<hr>
+<!-- $include ../geral/mensagemPadrao.html -->

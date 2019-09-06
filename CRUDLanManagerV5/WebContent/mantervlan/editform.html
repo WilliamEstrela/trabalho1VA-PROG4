@@ -1,0 +1,27 @@
+<h1>Nova Vlan</h1>
+<form action="sistema" method="post">
+	<input type="hidden" name="casoDeUso" value="manterVlan"> <input
+		type="hidden" name="acao" value="${acao}">
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Tipo</th>
+			<th>Ativo</th>
+		</tr>
+		<tr>
+			<td><input type="text" name="vlan" value="${vlan.vlan}"${vlan_readonly}></td>
+			<td><input type="text" name="nome" value="${vlan.nome}"></td>
+			<td>
+				<select name="ativo">
+					<option value=''>Selecione</option>
+					<option value='true' ${vlan.ativo.true.selected}>sim</option>
+					<option value='false' ${vlan.ativo.false.selected}>não</option>
+				</select>
+			
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" value="Salvar"></td>
+	</table>
+</form>
+<!-- $include ../geral/mensagemPadrao.html -->

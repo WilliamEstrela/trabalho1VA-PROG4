@@ -1,0 +1,48 @@
+Como criar um caso de uso na arquitetura  exemplo:
+1. Criar uma pasta para o caso de uso em webcontent.
+** Padrão para criação da pasta.
+*** nome_do_caso_de_uso exemplo:
+**** manteraluno
+2. Dentro da pasta criada, nos devemos ter cinco arquivos.
+* editar.html --> utilizado pra edição
+* editform.html --> é o formulário compartilhado para incluir e editar.
+* index.html --> Página inicial do caso de uso.
+* listarTodos.html --> Pagina que lista todos as linhas do caso de uso.
+* novo.html --> formulário utilizado pra criar um novo.]
+
+** é interessante copiar o mantertipo como exemplo
+3. após copiar os arquivos, fazer a edição para a tabela que está sendo mantida. Tomando cuidado com o nome do caso de uso e nome das colunas da tabela que está sendo mantida.
+
+4. Criar um classe que herde da classe model.Tabela
+** o generic( <TipoPK> ) na declaração da classe deve ser substituído pelo tipo utilizado pela Chave Primária
+** Declarar um atributo para cada coluna da tabela.
+** Criar os metodos get e set para cada atribuito.
+
+4.1 os metodos getTabelaPKNome, getTabelaNome, getCamposNome --> devem ser editados para retornar os dados da tabela que está sendo mantida
+4.2 o método setCamposValor deve ser editado para refletir os atributos da tabela que está sendo mantida, ele vai receber lista de Object com os valores das colunas na ordem definina pelo metodo getCamposNome. e o método deve receber esse List<Object> e tratar ele passando os valores para cada atributo da classe utilizando os métodos "setAtributo"
+4.3 o método getCamposValor deve retornar um List<Object> com o valor dos atributos, sendo que ordem deve ser a mesma que o método getCamposNome retorna.
+4.4 se você estiver utilizando um atributo para pk você deve sobrescrever os metodos getPk e setPk para utilizar esse atributo, veja exemplo no modelo Vlan
+4.5 o método getCamposConversor deve retonar um List<IConversor> com um conversor para cada atributo da tabela. 
+
+5. criar a classe de controle que herde da classe controle.CrudControle
+** o generic ( TABELA extends Tabela<TipoPK>, TipoPK ) na declaração da classe deve ser substituído pela classe da tabela/entidade que será mantida pelo controlador e o tipo da sua PK.
+** Utilize um modelo como base para facilitar a copia, o ManterTipo é um bom começo para controle sem ações personalizadas, e ManterVlan se tiver ações de negocio personalizadas(acaoAtivar e AcaoDesativar, exemplos).
+5.1 se você copiou o ManterTipo você deve editar o método getCasoDeUso para que ele retorno um string que identifique o caso de uso do controlador, esse string vai ser utilizada na URL para que o ServletControler identifique o caso de uso.
+5.2 modificar o metodo getNovoObjeto para que ele retorno o um objeto da Tabela(modelo) que está sendo utilizado por esse controlador. 
+
+6. Modificar o metodo configurarControladoresDeVisao da classe ViewServlet.(controlador de visão)
+** Basta adicionar um nova linha ao método instanciando o controlador de visão que será utilizado pelo 
+   Controle criado no passo 5, como estamos fazendo um CRUD deve ser incluido uma linha(considerando caso de uso manterAluno)
+   conf.put("manterAluno", new VisaoCrudServletControle());
+7. Para finalizar vamos modificar o metódo  configurarControladores da classe ViewServlet (controlador de negócio)
+** basta adicionar uma nova linha no método instanciando o controlador de negocio criado no passo 5. Ex.:
+   conf.add(new ManterAluno());  
+   
+8. editar o arquivo de conexão Projeto\resources\config.properties conforme as informações do banco
+
+9. Editar o arquivo do projeto Webcontent\page.html para remover os casos de teste e incluir o seu.
+
+10. Agora o teste. Vamos iniciar a aplicação e acessar a url:
+** http://localhost:8080/NOMEDOPROJETO/sistema?casoDeUso=XXXXXXXXXX&acao=yyyyyyy
+** onde XXXXXXXXXX --> o nome do caso de uso retornado pelo Metodo getCasoDeUso da classe Controladora criado no passo 5
+** yyyyyyy ==> nome da ação, no VisaoCrudServletControle está especificado inicialmente: index, listarTodos, novo, editar, alterar, incluir, apagar 

@@ -1,0 +1,21 @@
+	<table class="table table-striped table-bordered table-hover">
+		<tr>
+			<th>Vlan</th>
+			<th>nome</th>
+			<th>ativo</th>
+			<th>Ação</th>
+		</tr>
+<!-- $beginBlock mantervlan -->
+		<tr>
+			<td>${vlan}</td>
+			<td>${nome}</td>
+			<td>${ativo_tela}</td>
+			<td>
+				<a href="sistema?casoDeUso=manterVlan&acao=${acaoEditar}&vlan=${vlan}">Editar</a>
+				<a href="sistema?casoDeUso=manterVlan&acao=${acaoApagar}&vlan=${vlan}">Remover</a>
+				<a href="sistema?casoDeUso=manterVlan&acao=ativar&vlan=${vlan}">Ativar</a>
+				<a href="sistema?casoDeUso=manterVlan&acao=desativar&vlan=${vlan}">Desativar</a>
+			</td>
+		</tr>
+<!-- $endBlock mantervlan -->
+	</table>

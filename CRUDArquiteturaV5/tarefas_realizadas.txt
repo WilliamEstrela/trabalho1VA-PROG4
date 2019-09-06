@@ -1,0 +1,80 @@
+V3
+* criado o metodo Tabela.getColunaIndice(String name) - retornar o indice da Coluna pelo nome
+* criado o metodo Tabela.getCampoValor(String nome) - retorno o valor de um campo pelo nome
+
+* tratado no metodo DAOGeneric.getListaCamposNomesInserir():
+** para retornar apenas os campos que tem valores preenchidos(string vazia é campo preenchido)
+
+* tratado no metodo DAOGeneric.getStringValoresPreparedstatementUpdate:
+** para retornar string de valores apenas para campos com valores
+
+* tratado no metodo DAOGeneric.getStringValoresPreparedstatementInsert:
+** para retornar String de valores apenas para campos como valores
+
+-- V4 --
+##TODAS AS MODIFICAÇÕES ABAIXO NÃO IMPACTARAM NA APLICAÇÃO JÁ CODIFICADA ANTERIORMENTE###
+
+* Modificado a forma de executarAcao da visao e do controle para utilizar referencia a metodos
+** adicionado a interface IReferenciaVisaoAcao para os metodos de processar da visao
+** modificado a interface IVisaoControle, adicionado o Metodo getAcaoMetodosUtil
+
+* criado a classe VisaoServletControleGenerica o seu código foi copiado da classe VisaoServletControle,
+** a classe VisaoServletControle passou a ser final(não pode ser extendida), 
+    quem quiser criar uma classe que herde seu comportamento deve hedar de VisaoServletControleGenerica
+    Pois a classe que herda de VisaoServletControleGenerica deve implementar o 
+    metodo  "HashMap<String, IReferenciaVisaoAcao> getAcaoMetodos()" que é um map de ação referencia a metodos
+    Referencia sobre isso: http://tecnopode.blogspot.com.br/2015/09/referencias-para-metodos-e-seu-uso.html,  https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
+    para ver exemplo veja o metodo  VisaoServletControleGenerica.getAcaoMetodosUtil().
+
+* criado a classe VisaoCrudServletControleGenerica o seu código foi copiado da classe VisaoCrudServletControle,
+** a classe VisaoCrudServletControle passou a ser final(não pode ser extendida), 
+    quem quiser criar uma classe que herde seu comportamento deve hedar de VisaoCrudServletControleGenerica
+    Pois a classe que herda de VisaoCrudServletControleGenerica deve implementar o 
+    metodo  "HashMap<String, IReferenciaVisaoAcao> getAcaoMetodos()" que é um map de ação referencia a metodos
+    Referencia sobre isso: http://tecnopode.blogspot.com.br/2015/09/referencias-para-metodos-e-seu-uso.html,  https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
+    para ver exemplo veja o metodo  VisaoServletControleGenerica.getAcaoMetodosUtil().
+    
+* criado o metodo visao.ServletControle.processarAcaoDeVisao que utiliza o map(hashmap) 
+   para executar a acao de visao 
+
+* modificado o metodo visao.ServletControle.executarAcao() para char o metodo 
+    processarAcaoDeVisao
+	
+	-- camada de negocio --
+* criado a interface IReferenciaAcaoNegocio para os metodos de execucao de negocio
+* adicionado o metodo IControleNegocio.public HashMap<String, IReferenciaAcaoNegocio> getAcaoMetodosUtil();
+** para retornar a lista de acoes suportadas pelo controlador
+** O metodo initAcoesValidas foi modificado para pega a lista de ações retornadas pelo metodo getAcaoMetodosUtil e retornar a lista 
+
+* todas as acoes de controle acaoNome foram modificadas para não receber o Retorno e sim retonar um Retorno
+
+* criado o metodo controle.processarAcaoDeNegocio para executar da acao do negocio
+
+* metodo controle.executar foi modificado para utilizar o metodo controle.processarAcaoDeNegocio para executar a ação 
+
+* adicionado na acao de edicao uma nova variavel de template pkname_readonly que tera o valor "readonly" apenas na edição e para inclusão (acao.novo) quando a chave primaria não deve ser informada para inserção
+
+* adicionado ao pacote disponiblizado o projeto TesteReferencia para teste de referencias a metodos
+
+
+== V4 == Realizado junto com os alunos.
+* no DAOGeneric foi criado o método getCamposValorUtil que chama o metodo getCamposValor, todas as referencias do getCampoValor nas classes da arquitetura mudaram para o getCamposValorUtil.
+        (para validar se a quantidade de valores é igual a de campos)
+* modificado o método Tabela.getNumerosCampos() para utilizar o getCamposNomes no lugar do getCamposValor
+* no DAOGeneric foi criado o método getCamposConversorUtil que chama o metodo getCamposConversor, todas as referencias do getCamposConversor nas classes da arquitetura mudaram para o getCamposConversorUtil.
+        (para validar se a quantidade de conversores é igual a de campos)
+* modificado os métodos metodo DAOGenric.Listar e DAOGeneric.Procurar para evitar repetição de código, foi criado o metodo listarOuProcurar para ser utilizado no listar e no procurar
+
+== V4 == sem os alunos, já foi feito duas vezes com os alunos.
+* na classe Tabela foi criado o método Tabela.getTabelaPkNomeUtil que chama o metodo Tabela.getTabelaPkNome, todas as referencias do getTabelaPkNome nas classes da arquitetura mudaram para o getTabelaPkNomeUtil.
+        (para validar se o nome da pk está na lista de nomes retornadas pelo getCamposNome)
+* criado uma sobrecarga do método view.controller.VisaoCrudServletControleGenerica.getMapValoresFromTabela para receber apenas uma tabela e retonar o HashMap<String, Object> (coluna, valorColuna)
+* criado o metodo view.controller.VisaoCrudServletControleGeneric.mesclarMapValores para receber um map e mesclar seus valores no template(feito para reaproveitar no metodo processarTodos
+* modificado o metodo view.controller.VisaoCrudServletControleGeneric.processaListarTodos para aproveitar melhor os métodos e evitar repetição
+* modificada o método  view.controller.VisaoCrudServletControleGenerica.processarTabela para utilizar o método getMapValoresFromTabela para unificar a local onde os dados de tabelas são buscados.
+
+
+== v5 == sem participação alunos.
+* remoção dos códigos comentados. e dos warnings nas classes
+* Adição do suporte a entrypoint, Ver exemplo classe VisaoManterSwitch
+* Adição do suporte a entrypoint, ver exemplo classe ManterVlan

@@ -1,0 +1,95 @@
+------------------------------ Versão 4 ------------------------------------------------------------
+* Versão destinada e criar mecanismos que evite erro na especificação do modelo
+
+* validar o metodo getCamposValor (deve ter o mesmo número de valores que o getCamosNomes) - 
+   testar na classe vlan(tirar retorno de atributo)
+** Trabalhar o conceito de modificar a estrutura sem quebrar os códigos que já estão funcionando.
+** Acrescentar metodos que possam fazer a validação na classe Tabela, mas para não quebrar o código
+** criar um metodo novo para obter os valores e utilizar ele no DAOGneric, pois assim as classes de
+** modelo já existentes não precisam ser reescritas.(criar o metodo Tabela.getCamposValorUtil) 
+   e substituir onde é utilizado o getCamposValor na parte da arquitetura 
+   para não alterar os projetos que já estão utilizando a arquitetura
+** Corrigir metodo Tabela.getNumerosCampos() para utilizar a list de nomes
+** corrigir metodo Tabela.getCamposConversor() para verifcar se tem o número correto de conversores
+ 
+
+ 
+* Corrigir metodo DAOGenric.Listar e DAOGeneric.Procurar, pois o código é quase o mesmo e vai causar problema
+  para as alterações futuras na parte de busca.
+
+* validar o metodo getTabelaPknome() 
+ 
+* fazer tratamento de variáveis do banco de dados para a visão.
+** modificar a interface Converter para incluir o Método conveterBdParaVisao(TipoDados)
+
+ * Ver questão de tratamento de erro na camada de persistência. 
+
+
+------------------------------ Versão 5 -Validação  ------------------------------------------------------------
+* Versão destinada a criar uma estrutura de validação para o caso de uso, pois existem validações que 
+  próprias de um cenário(ação) de um caso de uso, exemplo são os campos obrigatórios, que existem o obrigatórios no modelo
+  mas existem campos que podem ser obrigatórios conforme o cenário, e essa estrutura que deve ser criada deve suportar isso.
+  Na Camada de Controle dos projetos já existentes ocorrerá mudanças(porque ainda estamos no inicio da arquitetura), mas mudanças
+  que quebrem o projeto devem ser muito bem pensadas para evitar ter que ficar dando manutenção.
+
+* Criar mecanismo de validação de negocio.
+** Modificar a classe controle.Controle para adicionar o mecanismo de validação.
+
+** criar uma interface para classes de validação (IControleValidacao) 
+*** essa interface deve ter um construtor que receba o controlador
+*** essa interface deve ter um metodo chamado validar que recebe a ação como parametro(string - em Constante)
+
+** Criar na classe controle.Controle um método Abstrato que retone uma HashMap<String, IControleValidacao) onde:
+*** o primeiro parametro é o nome da ação e o segundo é um objeto que implemente a interface IControleValidacao
+
+** criar a classe de Validação das ações que existe para substituir a validação atual se ação existe.
+
+** cria na classe controle.Controle um método que retorne a lista de Validadores padrão(Validação de Ação que existe) - getListaValidadores
+*** no final desse metrodo de ser utilizado o metodo abstrato que retorna o HashMap de validadores do controlador para adiciona-los a lista geral
+*** e retornar a lista geral
+
+** Modificar na classe controle.Controle o método executar para utilizar as classes de validação
+
+** modificar a classe controle.CrudControle - sobrescrever o metódo concreto getListaValidadores utilizando polimorfismo por refinamento para adicionar o
+*** na lista o Validador de Campos Obrigatórios (de modelo) - Será necessário criar a classe de validação para os campos obrigatórios.
+
+** Modificar a classe de controle controle.ManterPorta para criar validação para o tamanho do texto do campo porta
+
+
+------------------------------ Versão 6 - Tratamento de Relacionamento de 1:N  ------------------------------------------------------------
+* Entidade de exemplo para essa versão é switch e depois Porta
+* Modificação da classe Table pra obeter valor por nome
+* Modificação do CrudControler para retornar a listagem passando um tipo(listAllFromTable)
+* Modificação do CrudControler para retornar a lista de entidades relacionadas(fks, metodo listRelationTables)
+* Modificação do CrudServletController para trabalhar com componente Select
+** Metodo processNew e ProcessEdit foi modificado para incluir a chamada ao metodo processRelationTables, responsável por mesclar o conteúdo da tabela relacionadas
+** O select é feito usando relation.table
+** o valor selecionado é table.tablefk_pkname.selected
+
+------------------------------ Versão 7 - Localizar  ------------------------------------------------------------
+v6 - para localizar
+* Modificação crudcontroler para fazer localização 
+** modificação do metodo initValidActions
+** Criação do metodo search
+* Modificação do crudservletcontroller para fazer localziação
+** modificação do metodo execute
+** modificação do metodo processListAll
+*** foi generalizado uma parte do metodo para MergeList para ser reutilizado
+** criação do metodo processSearch
+* Modificação do GenerciDAO para fazer localização
+** criação do metodo searchOrListByTable
+** criação do metodo getS-tringWhere
+** criaçaõ do metodo searchByTableValues
+** modificação do metodo listAll para usar o searchOrListByTable
+* campo select sem tabela.
+** classe CrudServletConroller metodo processTable.
+
+
+------------------------------ Versão 8 - Localizar e LOGIN  ------------------------------------------------------------
+** aidcionado a IApplicationContoller para acesso a variaveis de aplicação(sessão)
+** Modificado a Classe ServletController para poder fazer o filtro das classes de login metodo processa
+** Modificado Interface Icontroller para adição do metodo needAutentication 
+** Modificado classe Controller para implementar o meotod needAutentication sem validação por padrão
+** Modificado classe ManterSwitch para sobrescrever metodo needAutentication para dizer que precisa de autenticação.
+** modificado metodo mergeVariables da classe CrudServetController para ServletControoller e criado outro metodo no CrudServletController para chamar o movido.
+*** foi adicionado o parametro prefixVariable 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="CRUDLanManagerV5">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/CRUDArquiteturaVisaoMiniTemplatorV5/CRUDArquiteturaVisaoMiniTemplatorV5">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/CRUDArquiteturaV5/CRUDArquiteturaV5">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="miniTemplator.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/CRUDArquiteturaVisaoMiniTemplatorV5/lib/miniTemplator.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/CRUDLanManagerV2/build/classes"/>
+        <property name="context-root" value="CRUDLanManagerV5"/>
+    </wb-module>
+</project-modules>

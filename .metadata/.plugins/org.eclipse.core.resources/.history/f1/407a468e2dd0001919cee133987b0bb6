@@ -1,0 +1,47 @@
+<h1>Dados da Reprovacao(${acao})</h1>
+<form action="sistema" method="post">
+<input type="hidden" name="casoDeUso" value="manterReprovacao">
+<input type="hidden" name="acao" value="${acao}">
+<table>
+<tr>
+	<th>Id</th>
+	<th>Nome</th>
+</tr>
+<tr>
+	<td><input type="text" name="idswitch" value="${reprovacao.id}"></td>
+	<td><input type="text" name="nome" value="${reprovacao.nome}"></td>
+</tr>
+<tr>
+	<th>Matricula</th>
+	<th>CPF</th>
+</tr>
+<tr>
+	<td><input type="text" name="localizacao" value="${reprovacao.matricula}"></td>
+	<td><input type="text" name="observacao" value="${reprovacao.cpf}"></td>
+</tr>
+<tr>
+	<th>Matéria</th>
+	<th>Professor</th>
+</tr>
+<tr>
+	<td>
+		<select name="tipo_idtipo">
+		    <option value="">Selecione</option>
+			<!-- $beginBlock estrangeiro.tipo -->
+			<option value="${estrangeiro.tipo.idtipo}" ${estrangeiro.tipo.selected}>${estrangeiro.tipo.tipo}</option>
+			<!-- $endBlock estrangeiro.tipo -->
+		</select>
+	</td>
+	<td><input type="text" name="observacao" value="${switch.professor}"></td>
+</tr>
+<tr>
+	<td>
+
+	</td>
+</tr>
+<tr>
+	<td colspan="2"><input type="submit" value="Salvar"></td>
+</table>
+</form>
+<hr>
+<!-- $include ../geral/mensagemPadrao.html -->
