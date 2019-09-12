@@ -3,57 +3,57 @@
             <div class="well">
               <form class="bs-example form-horizontal" action="${contextPath}/sistema" method="post">              	
                 <fieldset>                  
-	              <input type="hidden" name="casoDeUso" value="manterTipo">
+	              <input type="hidden" name="casoDeUso" value="manterReprovacao">
                   <div class="form-group">
 				  <input type="hidden" name="acao" value="apagar">
-				  <input type="hidden" name="idtipo" value="${tipo.idtipo}">
-                    <label for="idtipo" class="col-lg-2 control-label">ID</label>
+				  <input type="hidden" name="id" value="${reprovacao.id}">
+                    <label for="id" class="col-lg-2 control-label">ID</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.id}" disabled>
-                      
+                    <input class="form-control" id="focusedInput" type="text" value="${reprovacao.id}" disabled>
+                     
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="tipo" class="col-lg-2 control-label">NOME</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.nome}" disabled>                   
+                      <input class="form-control" id="focusedInput" type="text" value="${reprovacao.nome}" disabled>                  
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="tipo" class="col-lg-2 control-label">MATRICULA</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.matricula}" disabled> 
-                                     
+                      <input class="form-control" id="focusedInput" type="text" value="${reprovacao.matricula}" disabled>                 
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="tipo" class="col-lg-2 control-label">CPF</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.cpf}" disabled>                   
+                      <input class="form-control" id="focusedInput" type="text" value="${reprovacao.cpf}" disabled>                 
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="tipo" class="col-lg-2 control-label">MATERIA</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.materia}" disabled>                    
+                      <input class="form-control" id="focusedInput" type="text" value="${reprovacao.materia}" disabled>                   
                     </div>
                   </div>
                   
                    <div class="form-group">
                     <label for="tipo" class="col-lg-2 control-label">PROFESSOR</label>
                     <div class="col-lg-10">
-                    <input type="text" name="professor"  class="form-control" value="${reprovacao.professor}" disabled>                  
+                      <input class="form-control" id="focusedInput" type="text" value="${reprovacao.professor}" disabled>                  
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                      <button class="btn btn-primary">Cancelar</button> 
-                      <button type="submit" class="btn btn-danger">Confirmar</button>
+                      <a href="sistema?casoDeUso=manterReprovacao&acao=listarTodos" class="btn btn-info" role="button">Cancelar</a>
+                   
+                      <button type="submit" class="btn btn-primary">Confirmar Exclusao</button> 
                     </div>
                   </div>
                 </fieldset>
