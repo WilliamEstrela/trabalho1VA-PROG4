@@ -24,15 +24,6 @@ public class ViewServlet extends ServletControle {
 		conf.put("manterVlan", new VisaoTeste());
 		return conf;
 	}
-
-//	@Override
-//	public List<IControleNegocio> configurarControladores() {
-//		List<IControleNegocio> conf = new ArrayList<>();
-//		conf.add(new ManterSwitch());
-//		conf.add(new ManterTipo());
-//		conf.add(new ManterVlan());
-//		return conf;
-//	}
 	
 
 }

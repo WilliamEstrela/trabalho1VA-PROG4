@@ -33,7 +33,7 @@ public class ManterReprovacao extends CrudControle<Reprovacao,Integer> {
 		
 		if(cpf.isEmpty()) {
 			String action2 = acao.equals(INCLUIR) ? NOVO : EDITAR;
-			return new Retorno(false, "Campo CPF está invalido!", action2);
+			return new Retorno(false, "Campo CPF esta invalido!", action2);
 		}
 		return new Retorno(true, null, LISTAR_TODOS);
 	}

@@ -265,3 +265,8 @@
 0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:17:02 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=index HTTP/1.1" 200 5348
 0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:17:04 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=listarTodos HTTP/1.1" 200 6366
 0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:17:05 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=novo HTTP/1.1" 200 6942
+0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:20:36 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=listarTodos HTTP/1.1" 200 6366
+0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:20:40 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=novo HTTP/1.1" 200 6942
+0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:20:46 -0300] "POST /CRUDLanManagerV5/sistema HTTP/1.1" 200 7106
+0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:21:39 -0300] "POST /CRUDLanManagerV5/sistema HTTP/1.1" 200 5400
+0:0:0:0:0:0:0:1 - - [11/Sep/2019:23:29:09 -0300] "GET /CRUDLanManagerV5/sistema?casoDeUso=manterReprovacao&acao=listarTodos HTTP/1.1" 200 6738
