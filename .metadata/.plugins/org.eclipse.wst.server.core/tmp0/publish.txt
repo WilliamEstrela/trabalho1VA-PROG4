@@ -1,4 +1,0 @@
-#Tomcat publish data
-#Wed Sep 11 22:17:26 BRT 2019
-org.eclipse.jst.j2ee.server\:CRUDArquiteturaVisaoMiniTemplatorV5=WEB-INF/lib/CRUDArquiteturaVisaoMiniTemplatorV2.jar
-org.eclipse.jst.j2ee.server\:CRUDArquiteturaV5=WEB-INF/lib/CRUDArquiteturaV5.jar
