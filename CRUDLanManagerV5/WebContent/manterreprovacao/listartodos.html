@@ -6,6 +6,7 @@
 			<th>CPF</th>
 			<th>Materia</th>
 			<th>Professor</th>
+			<th>Acao</th>
 		</tr>
 <!-- $beginBlock manterReprovacao -->
 		<tr>
@@ -16,8 +17,8 @@
 			<td>${materia}</td>
 			<td>${professor}</td>
 			<td>
-				<a href="sistema?casoDeUso=manterReprovacao&acao=${acaoEditar}&id=${id}">Editar</a>
-				<a href="sistema?casoDeUso=manterReprovacao&acao=excluir&id=${id}">Remover</a>
+				<a href="sistema?casoDeUso=manterReprovacao&acao=editar&id=1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+				<a href="sistema?casoDeUso=manterReprovacao&acao=excluir&id=${id}"><i class="fa fa-trash-o"></i></a>
 				
 			</td>
 		</tr>

@@ -1,113 +1,104 @@
--- -----------------------------------------------------
--- Table tipo
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS tipo (
-  idtipo serial NOT NULL ,
-  tipo VARCHAR(50) NOT NULL ,
-  PRIMARY KEY (idtipo) );
-
--- -----------------------------------------------------
--- Table vlan
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS vlan (
-  vlan INT NOT NULL ,
-  nome VARCHAR(40) NULL ,
-  ativo boolean default true,
-  PRIMARY KEY (vlan) );
--- -----------------------------------------------------
--- Table switch
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS switch (
-  idswitch serial NOT NULL ,
-  nome VARCHAR(100) NOT NULL ,
-  localizacao VARCHAR(255) NULL ,
-  observacao VARCHAR(8000) NULL ,
-  tipo_idtipo INT NOT NULL ,
-  vlan	INT NULL,
-  PRIMARY KEY (idswitch)  ,
-  CONSTRAINT fk_switch_tipo
-    FOREIGN KEY (tipo_idtipo )
-    REFERENCES tipo (idtipo )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_switch_vlan
-    FOREIGN KEY (vlan )
-    REFERENCES vlan (vlan )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION  
-    
-    );
-
-
--- -----------------------------------------------------
--- Table porta
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS porta (
-  idporta serial NOT NULL  ,
-  switch_idswitch INT NOT NULL ,
-  porta VARCHAR(10) NOT NULL ,
-  PRIMARY KEY (idporta) ,
-  CONSTRAINT fk_porta_switch1
-    FOREIGN KEY (switch_idswitch )
-    REFERENCES switch (idswitch )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table equipamento
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS equipamento (
-  idequipamento serial NOT NULL ,
-  porta_idporta INT NOT NULL ,
-  nome VARCHAR(50) NOT NULL ,
-  descricao VARCHAR(500) NULL ,
-  observacao VARCHAR(8000) NULL ,
-  PRIMARY KEY (idequipamento) ,
-  CONSTRAINT fk_equipamento_porta1
-    FOREIGN KEY (porta_idporta )
-    REFERENCES porta (idporta )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
--- -----------------------------------------------------
--- Table porta_vlan versão original
--- -----------------------------------------------------
-/* CREATE  TABLE IF NOT EXISTS porta_vlan (
-  porta_idporta INT NOT NULL ,
-  vlan_vlan INT NOT NULL ,
-  data_criacao DATE NOT NULL ,
-  PRIMARY KEY (porta_idporta, vlan_vlan) ,
-  CONSTRAINT fk_porta_has_vlan_porta1
-    FOREIGN KEY (porta_idporta )
-    REFERENCES porta (idporta )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_porta_has_vlan_vlan1
-    FOREIGN KEY (vlan_vlan )
-    REFERENCES vlan (vlan )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION); */
-	
-	-- Table: porta_vlan
-
--- DROP TABLE porta_vlan;
-
-CREATE TABLE porta_vlan
+create table tipo
 (
-  idporta_vlan serial NOT NULL,
-  porta_idporta integer NOT NULL,
-  vlan_vlan integer NOT NULL,
-  --data_criacao date NOT NULL,
-  CONSTRAINT porta_vlan_pkey PRIMARY KEY (idporta_vlan),
-  CONSTRAINT fk_porta_has_vlan_porta1 FOREIGN KEY (porta_idporta)
-      REFERENCES porta (idporta)
-      ON UPDATE NO ACTION 
-	  ON DELETE NO ACTION,
-  CONSTRAINT fk_porta_has_vlan_vlan1 FOREIGN KEY (vlan_vlan)
-      REFERENCES vlan (vlan)
-      ON UPDATE NO ACTION 
-	  ON DELETE NO ACTION
+	idtipo serial not null
+		constraint tipo_pkey
+			primary key,
+	tipo varchar(50) not null
 );
+
+alter table tipo owner to postgres;
+
+create table vlan
+(
+	vlan integer not null
+		constraint vlan_pkey
+			primary key,
+	nome varchar(40),
+	ativo boolean default true
+);
+
+alter table vlan owner to postgres;
+
+create table switch
+(
+	idswitch serial not null
+		constraint switch_pkey
+			primary key,
+	nome varchar(100) not null,
+	localizacao varchar(255),
+	observacao varchar(8000),
+	tipo_idtipo integer not null
+		constraint fk_switch_tipo
+			references tipo,
+	vlan integer
+		constraint fk_switch_vlan
+			references vlan
+);
+
+alter table switch owner to postgres;
+
+create table porta
+(
+	idporta serial not null
+		constraint porta_pkey
+			primary key,
+	switch_idswitch integer not null
+		constraint fk_porta_switch1
+			references switch,
+	porta varchar(10) not null
+);
+
+alter table porta owner to postgres;
+
+create table equipamento
+(
+	idequipamento serial not null
+		constraint equipamento_pkey
+			primary key,
+	porta_idporta integer not null
+		constraint fk_equipamento_porta1
+			references porta,
+	nome varchar(50) not null,
+	descricao varchar(500),
+	observacao varchar(8000)
+);
+
+alter table equipamento owner to postgres;
+
+create table porta_vlan
+(
+	idporta_vlan serial not null
+		constraint porta_vlan_pkey
+			primary key,
+	porta_idporta integer not null
+		constraint fk_porta_has_vlan_porta1
+			references porta,
+	vlan_vlan integer not null
+		constraint fk_porta_has_vlan_vlan1
+			references vlan
+);
+
+alter table porta_vlan owner to postgres;
+
+create table reprovacao
+(
+	id serial not null
+		constraint reprovacao_pk
+			primary key,
+	nome varchar,
+	matricula varchar,
+	cpf varchar,
+	materia varchar,
+	professor varchar
+);
+
+alter table reprovacao owner to postgres;
+
+create table materia
+(
+	id serial not null,
+	materia varchar
+);
+
+alter table materia owner to postgres;
 

@@ -1,4 +1,0 @@
-URLCONEXAO=jdbc:postgresql://localhost:54320/public
-USUARIO_BD=postgres
-SENHA_BD=
-DRIVER_BD=org.postgresql.Driver

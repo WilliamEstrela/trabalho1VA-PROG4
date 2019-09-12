@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+		<div class="col-md-4 col-md-offset-4">
+        <div class="card">
+	        <div class="card-header">
+	    		Pessoa
+	  		</div>
+            <div class="card-body">
+                <form method=post class="col-md-8">
+                		<input type="hidden" value="${id}">
+                    <div class="form-group">
+                        <label for="cpf">Nome</label>
+                        <input type="cpf" class="form-control" id="cpf" name="cpf" aria-describedby="cpf" placeholder="Digite o cpf" value="${reprovacao.nome}" required>
+                    </div>
+                  <div class="form-group">
+                        <label for="carro">Carro</label>
+						<select id="carro" name="carro" class="form-control">
+						    <option value="">Selecione</option>
+							<!-- $beginBlock carroBlock -->
+							<option selected>${carro}</option>
+							<!-- $endBlock carroBlock -->
+						</select> 
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="nascimento" class="form-control" id="nome" name="nome" aria-describedby="nome" placeholder="Digite o nome" value="${nome}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nascimento">Nascimento</label>
+                        <input type="telefone" class="form-control" id="nascimento" name="nascimento" aria-describedby="nascimento" placeholder="Digite a nascimento" value="${nascimento}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="telefone" class="form-control" id="telefone" name="telefone" aria-describedby="telefone" placeholder="Digite o telefone" value="${telefone}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Email</label>
+                        <input type="telefone" class="form-control" id="email" name="email" aria-describedby="email" placeholder="Digite o email" value="${email}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Cidade</label>
+                        <input type="telefone" class="form-control" id="cidade" name="cidade" aria-describedby="cidade" placeholder="Digite a cidade" value="${cidade}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Estado</label>
+                        <input type="telefone" class="form-control" id="estado" name="estado" aria-describedby="estado" placeholder="Digite o estado" value="${estado}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Cep</label>
+                        <input type="telefone" class="form-control" id="cep" name="cep" aria-describedby="cep" placeholder="Digite o cep" value="${cep}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <a href="listar" class="btn btn-info">Listar</a>
+                    <button type="remover" class="btn btn-danger">Remover</button>
+                    </form>
+            </div>
+        </div>
+<!-- $include ../geral/mensagemPadrao.html -->

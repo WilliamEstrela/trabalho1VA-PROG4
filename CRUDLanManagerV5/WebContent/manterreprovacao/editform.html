@@ -1,26 +1,25 @@
-<h1>Dados da Reprovacao(${acao})</h1>
+<h1>Incluir Reprovacao</h1>
 <form action="sistema" method="post">
 <input type="hidden" name="casoDeUso" value="manterReprovacao">
 <input type="hidden" name="acao" value="${acao}">
 <table>
 <tr>
-	<th>Id</th>
 	<th>Nome</th>
 </tr>
 <tr>
-	<td><input type="text" name="id" value="${reprovacao.id}"></td>
-	<td><input type="text" name="nome" value="${reprovacao.nome}"></td>
+	<td><input type="text" name="nome" class="form-control" value="${reprovacao.nome}"></td>
 </tr>
 <tr>
 	<th>Matricula</th>
 	<th>CPF</th>
 </tr>
 <tr>
-	<td><input type="text" name="matricula" value="${reprovacao.matricula}"></td>
-	<td><input type="text" name="cpf" value="${reprovacao.cpf}"></td>
+
+	<td><input type="text" class="form-control" name="matricula" value="${reprovacao.matricula}"></td>
+	<td><input type="text" class="form-control" name="cpf" value="${reprovacao.cpf}"></td>
 </tr>
 <tr>
-	<th>Matéria</th>
+	<th>Materia</th>
 	<th>Professor</th>
 </tr>
 <tr>
@@ -32,15 +31,10 @@
 			<!-- $endBlock estrangeiro.materia -->
 		</select>
 	</td>
-	<td><input type="text" name="professor" value="${reprovacao.professor}"></td>
+	<td><input type="text" name="professor"  class="form-control" value="${reprovacao.professor}"></td>
 </tr>
 <tr>
-	<td>
-
-	</td>
-</tr>
-<tr>
-	<td colspan="2"><input type="submit" value="Salvar"></td>
+	<td colspan="2"><input class="btn btn-primary" type="submit" value="Salvar"></td>
 </table>
 </form>
 <hr>

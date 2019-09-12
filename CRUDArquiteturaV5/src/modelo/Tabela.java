@@ -35,7 +35,7 @@ public abstract class Tabela<TipoPK> {
 	}
 	
 	
-	/** retorno o nome da tabela para utilizar na persitência
+	/** retorno o nome da tabela para utilizar na persitï¿½ncia
 	 * @return nome da tabela
 	 */
 	public String getTabelaNome() {
@@ -58,9 +58,9 @@ public abstract class Tabela<TipoPK> {
 				return pkNome;
 			}
 		}
-		String msg = "O Método "+this.getClass().getName()+".getTabelaPKNome()"
-				+ " está retornando um nome de coluna que não existe, "
-				+ " valor retornado:"+pkNome+ " valores válidos: "+String.join(",",this.getCamposNome());
+		String msg = "O Mï¿½todo "+this.getClass().getName()+".getTabelaPKNome()"
+				+ " estï¿½ retornando um nome de coluna que nï¿½o existe, "
+				+ " valor retornado:"+pkNome+ " valores vï¿½lidos: "+String.join(",",this.getCamposNome());
 		throw new RuntimeException(msg);
 		
 	}
@@ -75,7 +75,7 @@ public abstract class Tabela<TipoPK> {
 		List<Object> list = this.getCamposValor();
 		if(list.size()!=this.getNumerosCampos()){
 			
-			String msg = "O Método "+this.getClass().getName()+".getCamposValor()"
+			String msg = "O Mï¿½todo "+this.getClass().getName()+".getCamposValor()"
 					+ " deveria retornar uma lista com "+this.getNumerosCampos()
 					+ " item/itens e retornou com "+list.size()+" item/itens!";
 			throw new RuntimeException(msg);
@@ -99,7 +99,7 @@ public abstract class Tabela<TipoPK> {
 		List<IConversor> list = this.getCamposConversor();
 		if(list.size()!=this.getNumerosCampos()){
 			
-			String msg = "O Método "+this.getClass().getName()+".getCamposConversor()"
+			String msg = "O Mï¿½todo "+this.getClass().getName()+".getCamposConversor()"
 					+ " deveria retornar uma lista com "+this.getNumerosCampos()
 					+ " item/itens e retornou com "+list.size()+" item/itens!";
 			throw new RuntimeException(msg);
@@ -118,7 +118,7 @@ public abstract class Tabela<TipoPK> {
 	protected List<String> getCamposObrigatorios(){
 		return Reflexao.getTabelaCamposObritatorios(this);
 	}
-	/*{//Seria necessário se não quisesse quebra o código
+	/*{//Seria necessï¿½rio se nï¿½o quisesse quebra o cï¿½digo
 		List<String> list = new ArrayList<String>();
 		return list;
 	}*/
@@ -138,7 +138,7 @@ public abstract class Tabela<TipoPK> {
 			if(encontrou== false){
 				throw new RuntimeException(
 						"Campo "+campoNome+
-						" não é um nome válido para:"+
+						" nï¿½o ï¿½ um nome vï¿½lido para:"+
 								this.getClass().getName()+
 								" Erro no metodo getCamposObrigatorios()!");
 			}
@@ -147,7 +147,7 @@ public abstract class Tabela<TipoPK> {
 				
 	}
 	/** metodo para configurar os valores do objeto.
-	 * ele só é chamado se a lista tiver o número correto de valores
+	 * ele sï¿½ ï¿½ chamado se a lista tiver o nï¿½mero correto de valores
 	 * @param list
 	 * @return
 	 */
@@ -174,11 +174,11 @@ public abstract class Tabela<TipoPK> {
 					meth.invoke(this, new Object[] {list.get(i)});
 				} catch (NoSuchMethodException | SecurityException | 
 						IllegalArgumentException  e) {
-					throw new RuntimeException("Classe: "+this.getClass().getName()+" não possui "
+					throw new RuntimeException("Classe: "+this.getClass().getName()+" nï¿½o possui "
 							+ "metodo para configurar o campo="+campos[i].getName()+" deveria ter:"+auxNome);
 				} catch (IllegalAccessException e) {
 					throw new RuntimeException("Na Classe: "+this.getClass().getName()+" "
-							+ "O método:"+auxNome +" não é publico");
+							+ "O mï¿½todo:"+auxNome +" nï¿½o ï¿½ publico");
 				} catch(InvocationTargetException e) {
 					ret.setSucesso(false);
 					ret.addMensagem("Erro ao configura campos, na Classe:"+this.getClass().getName()+""
@@ -207,12 +207,12 @@ public abstract class Tabela<TipoPK> {
 		Retorno ret = new Retorno(true,null);
 		if(list==null){
 			ret.setSucesso(false);
-			ret.addMensagem("Necessário passar a lista de valores para configura objeto");
+			ret.addMensagem("Necessï¿½rio passar a lista de valores para configura objeto");
 			return ret;
 		}
 		if(list.size()!=this.getNumerosCampos()){
 			ret.setSucesso(false);
-			ret.addMensagem("Necessário passar a lista de valores para configura objeto com " + this.getNumerosCampos());
+			ret.addMensagem("Necessï¿½rio passar a lista de valores para configura objeto com " + this.getNumerosCampos());
 			return ret;
 		}
 		//metodo abstrato que realmente configura os valores
@@ -227,7 +227,7 @@ public abstract class Tabela<TipoPK> {
 					valor = listaConversores.get(i).converter(String.valueOf(valor));
 				}catch(RuntimeException e){
 					ret = new Retorno(false,
-							"Erro de Conversão no campo:"+listaCamposNomes.get(i)+", ERRO:"+e.getMessage());
+							"Erro de Conversï¿½o no campo:"+listaCamposNomes.get(i)+", ERRO:"+e.getMessage());
 					return ret;
 					
 				}
@@ -251,9 +251,9 @@ public abstract class Tabela<TipoPK> {
 		List<Object> camposValor = this.getCamposValorUtil();
 		String resultado = "";
 		for(int i=0;i<camposNome.size();i++){
-			resultado =resultado + ","+camposNome.get(i)+"="+camposValor.get(i);
+			resultado = resultado + camposValor.get(i);
 		}
-		return this.getClass().getSimpleName()+" ["+resultado.substring(1)+"]";
+		return resultado.substring(1);
 	}
 	
 
@@ -265,14 +265,14 @@ public abstract class Tabela<TipoPK> {
 	public int getCampoIndice(String nome) {
 		int indice = this.getIndiceColuna(nome);
 		if(indice>=this.getCamposNome().size()) {
-			throw new RuntimeException("Coluna: "+nome+" Não pertence a tabela:"+this.getClass().getName());
+			throw new RuntimeException("Coluna: "+nome+" Nï¿½o pertence a tabela:"+this.getClass().getName());
 		}
 		return indice;
 	}
 	public Object getCampoValor(String nome) {
 		List<String> camposNome = this.getCamposNome();
 		if(!camposNome.contains(nome)) {
-			throw new RuntimeException("Campo: "+nome+" não existe na tabela:"+this.getTabelaNome());
+			throw new RuntimeException("Campo: "+nome+" nï¿½o existe na tabela:"+this.getTabelaNome());
 		}
 		List<Object> camposValor = this.getCamposValorUtil();
 		return camposValor.get(this.getCampoIndice(nome));
